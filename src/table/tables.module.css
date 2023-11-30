@@ -1,0 +1,47 @@
+.table {
+  border-spacing: 0;
+}
+
+.header-cell {
+  color: #6a6a7a;
+  background: #f4f4f7;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  padding: 11px 12px;
+  border-right: 1px solid #d9d9e1;
+  border-top: 1px solid #d9d9e1;
+  border-bottom: 1px solid #d9d9e1;
+  border-spacing: 0px;
+
+  &:last-child {
+    border-right: 0px solid #d9d9e1;
+  }
+}
+
+/* ------------------------ */
+
+.table-cell {
+  color: #040134;
+  font-family: Ubuntu;
+  padding: 12px;
+  border-right: 1px solid #d9d9e1;
+  border-bottom: 1px solid #d9d9e1;
+
+  &:last-child {
+    border-right: 0px solid #d9d9e1;
+  }
+}
+
+
+/* sticky header*/
+
+table {
+  position: relative;
+}
+
+th {
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  box-sizing: border-box;
+}
