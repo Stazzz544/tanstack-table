@@ -9,37 +9,46 @@ import cs from "classnames";
 import styles from "./tables.module.css";
 import { Person, defaultData } from "./bd";
 import { NameCell } from "./name-cell/name-cell";
+import React from "react";
 
 const columnHelper = createColumnHelper<Person>();
 
-const columns = [
-  columnHelper.accessor("firstName", {
-    header: () => <span>Фамилия</span>,
-  }),
-  columnHelper.accessor("lastName", {
-    cell: (info) => <NameCell text={info.getValue()} />,
-    header: () => <span>Имя</span>,
-  }),
-  columnHelper.accessor("age", {
-    header: () => "Возраст",
-    minSize: 300,
-    size: 999999, // вот тут по сути бесконечность но не более доступной ширины
-  }),
-  columnHelper.accessor("visits", {
-    header: () => <span>Visits</span>,
-    minSize: 300,
-  }),
-  columnHelper.accessor("status", {
-    header: "Status",
-  }),
-  columnHelper.accessor("count", {
-    header: "Profile Progress",
-    minSize: 300,
-  }),
-];
-
 export const Table = () => {
   const [data, setData] = useState(() => defaultData);
+
+  const columns = React.useMemo<any>(
+    () => [
+      {
+        header: "Name",
+        columns: [
+          columnHelper.accessor("firstName", {
+            header: () => <span>Фамилия</span>,
+          }),
+          columnHelper.accessor("lastName", {
+            cell: (info) => <NameCell text={info.getValue()} />,
+            header: () => <span>Имя</span>,
+          }),
+          columnHelper.accessor("age", {
+            header: () => "Возраст",
+            minSize: 300,
+            size: 999999, // вот тут по сути бесконечность но не более доступной ширины
+          }),
+          columnHelper.accessor("visits", {
+            header: () => <span>Visits</span>,
+            minSize: 300,
+          }),
+          columnHelper.accessor("status", {
+            header: "Status",
+          }),
+          columnHelper.accessor("count", {
+            header: "Profile Progress",
+            minSize: 300,
+          }),
+        ],
+      },
+    ],
+    []
+  );
 
   const table = useReactTable({
     data,
@@ -50,9 +59,9 @@ export const Table = () => {
   return (
     <div>
       <table className={cs(styles["table"])}>
-        <thead>
+        <thead className={cs(styles["t-head"])}>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr className={cs(styles["summary"])} key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const minWidth = header.column.columnDef.minSize;
                 const width = header.column.columnDef.size || "auto";

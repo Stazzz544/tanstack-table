@@ -33,15 +33,22 @@
   }
 }
 
-
 /* sticky header*/
 
 table {
   position: relative;
 }
 
-th {
-  position: sticky;
-  top: 0; /* Don't forget this, required for the stickiness */
-  box-sizing: border-box;
+.t-head > tr {
+  &:nth-child(1) {
+    position: sticky;
+    top: 0px; /* Don't forget this, required for the stickiness */
+    box-sizing: border-box;
+  }
+
+  &:nth-child(2) {
+    position: sticky;
+    top: 40px; /* Don't forget this, required for the stickiness */
+    box-sizing: border-box;
+  }
 }
